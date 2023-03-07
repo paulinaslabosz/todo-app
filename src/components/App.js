@@ -7,7 +7,9 @@ class App extends Component {
   render() {
     return (
       <>
-        <AddTask />
+        <div className='wrapper'>
+          <AddTask />
+        </div>
       </>
     );
   }

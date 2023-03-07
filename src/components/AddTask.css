@@ -1,0 +1,31 @@
+
+
+label {
+display: flex;
+justify-content: center;
+}
+
+
+.inlineWrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.priority {
+    margin-left: 10px;
+}
+
+
+button {
+    display: block;
+    margin: 25px auto;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 15px;
+    width: 100px;
+    background-color: white;
+}
+ button:hover {
+    background-color: rgb(208, 211, 211);
+ }
