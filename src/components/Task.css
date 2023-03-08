@@ -1,10 +1,8 @@
 li {
-    display: flex;
-    gap: 20px;
+    display: grid;
     align-items: center;
-    height: 40px;
-
-    
+    grid-template-columns: 1fr 120px 100px;
+        
 }
 
 .button_container {
@@ -19,9 +17,7 @@ li {
     border-radius: 50%;
     padding: 0;
     margin-left: 5px;
-    
-
-}
+    }
 
 .task_button:hover {
     background-color: white;
@@ -29,5 +25,5 @@ li {
 }
 
 .task_date {
-margin-left: auto;
+/* margin-left: auto; */
 }
