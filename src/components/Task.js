@@ -3,7 +3,9 @@ import './Task.css';
 const Task = (props) => {
   return (
     <li>
-      <span>{props.title}</span>
+      <span style={props.priority ? { color: 'red' } : null}>
+        {props.title}
+      </span>
       <span className='task_date'>
         {' '}
         Do: <strong>{props.date}</strong>

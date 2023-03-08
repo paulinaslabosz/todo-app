@@ -3,7 +3,12 @@ import Task from './Task';
 import './TasksList.css';
 const TasksList = (props) => {
   const list = props.list.map((task) => (
-    <Task key={task.id} title={task.title} date={task.date} />
+    <Task
+      key={task.id}
+      title={task.title}
+      date={task.date}
+      priority={task.priority}
+    />
   ));
   return (
     <>

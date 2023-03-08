@@ -51,12 +51,14 @@ class App extends Component {
       const title = this.state.task;
       const date = this.state.date;
       const id = this.state.list.length + 1;
-      const task = { id, title, date };
+      const priority = this.state.priority;
+      const task = { id, title, date, priority };
       const newList = list.concat(task);
       this.setState({
         list: newList,
         task: '',
         date: this.getDate(),
+        priority: false,
       });
     } else {
       alert('Nie można dodać zadania bez nazwy');
