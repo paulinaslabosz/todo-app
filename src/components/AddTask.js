@@ -2,7 +2,7 @@ import React from 'react';
 import './AddTask.css';
 const AddTask = (props) => {
   return (
-    <form>
+    <form onSubmit={props.addTask}>
       <div className='inlineWrapper'>
         <label htmlFor='addTask'>
           <input

@@ -1,9 +1,14 @@
 import React from 'react';
 import './Task.css';
-const Task = () => {
+const Task = (props) => {
   return (
     <li>
-      Zadanie <span>data </span> <button className='task_button'>✔️</button>
+      {props.title}
+      <span className='task_date'>
+        {' '}
+        Do: <strong>{props.date}</strong>
+      </span>
+      <button className='task_button'>✔️</button>
       <button className='task_button'>❌</button>
     </li>
   );

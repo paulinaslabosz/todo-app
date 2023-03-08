@@ -16,3 +16,7 @@ li {
     background-color: white;
     font-size: 17px;
 }
+
+.task_date {
+    margin: 0 10px 0 10px;
+}

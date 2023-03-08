@@ -9,6 +9,7 @@ class App extends Component {
     task: '',
     priority: false,
     date: this.getDate(),
+    list: [],
   };
 
   getDate() {
@@ -42,8 +43,26 @@ class App extends Component {
       });
     }
   };
+
+  handleAddTask = (e) => {
+    e.preventDefault();
+    if (this.state.task !== '') {
+      const list = [...this.state.list];
+      const title = this.state.task;
+      const date = this.state.date;
+      const id = this.state.list.length + 1;
+      const task = { id, title, date };
+      const newList = list.concat(task);
+      this.setState({
+        list: newList,
+        task: '',
+        date: this.getDate(),
+      });
+    } else {
+      alert('Nie można dodać zadania bez nazwy');
+    }
+  };
   render() {
-    console.log(this.getDate());
     return (
       <>
         <div className='wrapper'>
@@ -53,8 +72,9 @@ class App extends Component {
             change={this.handleChange}
             date={this.state.date}
             test={this.state.test}
+            addTask={this.handleAddTask}
           />
-          <TasksList />
+          <TasksList list={this.state.list} />
           <DoneTasks />
         </div>
       </>
