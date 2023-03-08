@@ -1,5 +1,6 @@
 import React from 'react';
 import './Task.css';
+
 const Task = (props) => {
   return (
     <li>
@@ -12,13 +13,13 @@ const Task = (props) => {
       </span>
       <span className='button_container'>
         <button
-          onClick={() => props.doneTask(props.id, 'done')}
+          onClick={() => props.taskButton(props.id, 'done')}
           className='task_button'
         >
           ✔️
         </button>
         <button
-          onClick={() => props.doneTask(props.id, 'delete')}
+          onClick={() => props.taskButton(props.id, 'delete')}
           className='task_button'
         >
           ❌

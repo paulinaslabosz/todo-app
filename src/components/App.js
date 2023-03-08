@@ -9,8 +9,8 @@ class App extends Component {
     task: '',
     priority: false,
     date: this.getDate(),
-    list: [],
-    done: [],
+    tasksList: [],
+    doneTasks: [],
   };
 
   getDate() {
@@ -30,7 +30,7 @@ class App extends Component {
     return date;
   }
 
-  handleChange = (e) => {
+  handleChangeInput = (e) => {
     const name = e.target.name;
     if (name === 'task' || name === 'date') {
       const value = e.target.value;
@@ -48,15 +48,15 @@ class App extends Component {
   handleAddTask = (e) => {
     e.preventDefault();
     if (this.state.task !== '') {
-      const list = [...this.state.list];
+      const tasksList = [...this.state.tasksList];
       const title = this.state.task;
       const date = this.state.date;
-      const id = this.state.list.length + 1;
+      const id = this.state.tasksList.length + 1;
       const priority = this.state.priority;
       const task = { id, title, date, priority };
-      const newList = list.concat(task);
+      const updateList = tasksList.concat(task);
       this.setState({
-        list: newList,
+        tasksList: updateList,
         task: '',
         date: this.getDate(),
         priority: false,
@@ -66,19 +66,19 @@ class App extends Component {
     }
   };
 
-  handleDoneTask = (id, name) => {
+  handleTaskButton = (id, name) => {
     if (name === 'done') {
-      const doneTask = this.state.list.filter((task) => task.id === id);
-      const list = this.state.list.filter((task) => task.id !== id);
+      const doneTask = this.state.tasksList.filter((task) => task.id === id);
+      const tasksList = this.state.tasksList.filter((task) => task.id !== id);
       this.setState((prevState) => ({
-        done: prevState.done.concat(doneTask),
-        list,
+        doneTasks: prevState.doneTasks.concat(doneTask),
+        tasksList,
       }));
     }
     if (name === 'delete') {
-      const list = this.state.list.filter((task) => task.id !== id);
+      const tasksList = this.state.tasksList.filter((task) => task.id !== id);
       this.setState({
-        list,
+        tasksList,
       });
     }
   };
@@ -90,13 +90,15 @@ class App extends Component {
           <AddTask
             task={this.state.task}
             priority={this.state.priority}
-            change={this.handleChange}
+            changeInput={this.handleChangeInput}
             date={this.state.date}
-            test={this.state.test}
             addTask={this.handleAddTask}
           />
-          <TasksList list={this.state.list} doneTask={this.handleDoneTask} />
-          <DoneTasks doneTasks={this.state.done} />
+          <TasksList
+            tasksList={this.state.tasksList}
+            taskButton={this.handleTaskButton}
+          />
+          <DoneTasks doneTasks={this.state.doneTasks} />
         </div>
       </>
     );

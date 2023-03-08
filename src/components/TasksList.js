@@ -1,23 +1,25 @@
 import React from 'react';
 import Task from './Task';
 import './TasksList.css';
-const TasksList = (props) => {
-  const sortList = props.list.sort((a, b) => a.title.localeCompare(b.title));
 
-  const list = sortList.map((task) => (
+const TasksList = (props) => {
+  const sortList = props.tasksList.sort((a, b) =>
+    a.title.localeCompare(b.title)
+  );
+  const listOfTasks = sortList.map((task) => (
     <Task
       key={task.id}
       id={task.id}
       title={task.title}
       date={task.date}
       priority={task.priority}
-      doneTask={props.doneTask}
+      taskButton={props.taskButton}
     />
   ));
   return (
     <>
       <h2 className='todo_header'>Zadania do zrobienia</h2>
-      <ul>{props.list.length !== 0 ? list : <p>Brak zadań</p>}</ul>
+      <ul>{props.tasksList.length !== 0 ? listOfTasks : <p>Brak zadań</p>}</ul>
     </>
   );
 };

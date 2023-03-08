@@ -4,7 +4,6 @@ const DoneTask = (props) => {
   return (
     <li>
       <span>{props.title}</span>
-      <span>{props.id}</span>
     </li>
   );
 };

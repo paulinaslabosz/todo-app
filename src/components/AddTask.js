@@ -1,5 +1,6 @@
 import React from 'react';
 import './AddTask.css';
+
 const AddTask = (props) => {
   return (
     <form onSubmit={props.addTask}>
@@ -11,7 +12,7 @@ const AddTask = (props) => {
             id='addTask'
             value={props.task}
             name='task'
-            onChange={props.change}
+            onChange={props.changeInput}
           />
         </label>
 
@@ -21,7 +22,7 @@ const AddTask = (props) => {
             id='checkbox'
             checked={props.priority}
             name='priority'
-            onChange={props.change}
+            onChange={props.changeInput}
           />
           Priorytet
         </label>
@@ -33,7 +34,7 @@ const AddTask = (props) => {
           id='date'
           name='date'
           value={props.date}
-          onChange={props.change}
+          onChange={props.changeInput}
           min={props.date}
         />
       </label>
