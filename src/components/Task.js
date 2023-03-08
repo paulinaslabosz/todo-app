@@ -3,13 +3,15 @@ import './Task.css';
 const Task = (props) => {
   return (
     <li>
-      {props.title}
+      <span>{props.title}</span>
       <span className='task_date'>
         {' '}
         Do: <strong>{props.date}</strong>
       </span>
-      <button className='task_button'>✔️</button>
-      <button className='task_button'>❌</button>
+      <span className='button_container'>
+        <button className='task_button'>✔️</button>
+        <button className='task_button'>❌</button>
+      </span>
     </li>
   );
 };

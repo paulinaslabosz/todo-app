@@ -27,7 +27,7 @@ const AddTask = (props) => {
         </label>
       </div>
       <label htmlFor='date'>
-        Do kiedy zrobić:
+        Do kiedy zrobić:{' '}
         <input
           type='date'
           id='date'
