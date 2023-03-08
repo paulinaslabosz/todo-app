@@ -64,6 +64,14 @@ class App extends Component {
       alert('Nie można dodać zadania bez nazwy');
     }
   };
+
+  handleDeleteTask = (id) => {
+    const list = this.state.list.filter((task) => task.id !== id);
+    this.setState({
+      list,
+    });
+  };
+
   render() {
     return (
       <>
@@ -76,7 +84,10 @@ class App extends Component {
             test={this.state.test}
             addTask={this.handleAddTask}
           />
-          <TasksList list={this.state.list} />
+          <TasksList
+            list={this.state.list}
+            deleteTask={this.handleDeleteTask}
+          />
           <DoneTasks />
         </div>
       </>

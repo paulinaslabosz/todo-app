@@ -7,9 +7,11 @@ const TasksList = (props) => {
   const list = sortList.map((task) => (
     <Task
       key={task.id}
+      id={task.id}
       title={task.title}
       date={task.date}
       priority={task.priority}
+      deleteTask={props.deleteTask}
     />
   ));
   return (

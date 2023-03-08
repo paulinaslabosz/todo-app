@@ -12,7 +12,12 @@ const Task = (props) => {
       </span>
       <span className='button_container'>
         <button className='task_button'>✔️</button>
-        <button className='task_button'>❌</button>
+        <button
+          onClick={() => props.deleteTask(props.id)}
+          className='task_button'
+        >
+          ❌
+        </button>
       </span>
     </li>
   );
