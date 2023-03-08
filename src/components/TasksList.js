@@ -4,7 +4,7 @@ import './TasksList.css';
 const TasksList = () => {
   return (
     <>
-      <header>Zadania do zrobienia</header>
+      <h2 className='todo_header'>Zadania do zrobienia</h2>
       <ul>
         <Task />
       </ul>
