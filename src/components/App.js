@@ -10,6 +10,7 @@ class App extends Component {
     priority: false,
     date: this.getDate(),
     list: [],
+    done: [],
   };
 
   getDate() {
@@ -65,11 +66,21 @@ class App extends Component {
     }
   };
 
-  handleDeleteTask = (id) => {
-    const list = this.state.list.filter((task) => task.id !== id);
-    this.setState({
-      list,
-    });
+  handleDoneTask = (id, name) => {
+    if (name === 'done') {
+      const doneTask = this.state.list.filter((task) => task.id === id);
+      const list = this.state.list.filter((task) => task.id !== id);
+      this.setState((prevState) => ({
+        done: prevState.done.concat(doneTask),
+        list,
+      }));
+    }
+    if (name === 'delete') {
+      const list = this.state.list.filter((task) => task.id !== id);
+      this.setState({
+        list,
+      });
+    }
   };
 
   render() {
@@ -84,11 +95,8 @@ class App extends Component {
             test={this.state.test}
             addTask={this.handleAddTask}
           />
-          <TasksList
-            list={this.state.list}
-            deleteTask={this.handleDeleteTask}
-          />
-          <DoneTasks />
+          <TasksList list={this.state.list} doneTask={this.handleDoneTask} />
+          <DoneTasks doneTasks={this.state.done} />
         </div>
       </>
     );
