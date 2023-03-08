@@ -2,7 +2,9 @@ import React from 'react';
 import Task from './Task';
 import './TasksList.css';
 const TasksList = (props) => {
-  const list = props.list.map((task) => (
+  const sortList = props.list.sort((a, b) => a.title.localeCompare(b.title));
+
+  const list = sortList.map((task) => (
     <Task
       key={task.id}
       title={task.title}

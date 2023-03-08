@@ -2,6 +2,7 @@ li {
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 120px 100px;
+    grid-template-rows: 60px;
         
 }
 
