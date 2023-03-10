@@ -1,0 +1,50 @@
+
+.doneTask_grid {
+    display: grid; 
+    grid-template-columns: 1fr 120px 100px;
+    
+    gap: 0px;
+    height: 100%;
+    text-align: center;
+   
+}
+
+em {
+    font-size: 16px;
+}
+
+.done_confirm {
+    margin-bottom: 15px;
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-row-end: 3;
+    grid-column-end: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task_title {
+    font-weight: bold;
+}
+
+.done_button {
+    font-size: 15px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    border-radius: 50%;
+    padding: 0;
+    margin-left: 5px;
+    
+}
+
+.done_button:hover {
+    background-color: white;
+    font-size: 19px;
+}
+
+span {
+    text-align: center;
+}
+

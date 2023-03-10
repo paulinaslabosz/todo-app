@@ -1,104 +1,139 @@
 import React, { Component } from 'react';
 import AddTask from './AddTask';
 import './App.css';
-import DoneTasks from './DoneTasks';
-import TasksList from './TasksList';
+// import DoneTasks from './DoneTasks';
+// import TasksList from './TasksList';
 
 class App extends Component {
+  counter = 0;
   state = {
-    task: '',
-    priority: false,
-    date: this.getDate(),
-    tasksList: [],
+    tasks: [],
     doneTasks: [],
   };
 
-  getDate() {
-    const currentDate = new Date();
-    let year = currentDate.getFullYear();
-    let month = currentDate.getMonth() + 1;
-    let day = currentDate.getDate();
+  // getDate() {
+  //   const currentDate = new Date();
+  //   let year = currentDate.getFullYear();
+  //   let month = currentDate.getMonth() + 1;
+  //   let day = currentDate.getDate();
 
-    if (day < 9) {
-      day = '0' + day;
-    }
-    if (month < 9) {
-      month = '0' + month;
-    }
-    const date = year + '-' + month + '-' + day;
+  //   if (day < 9) {
+  //     day = '0' + day;
+  //   }
+  //   if (month < 9) {
+  //     month = '0' + month;
+  //   }
+  //   const date = year + '-' + month + '-' + day;
 
-    return date;
-  }
+  //   return date;
+  // }
 
-  handleChangeInput = (e) => {
-    const name = e.target.name;
-    if (name === 'task' || name === 'date') {
-      const value = e.target.value;
-      this.setState({
-        [name]: value,
-      });
-    } else if (name === 'priority') {
-      const checked = e.target.checked;
-      this.setState({
-        [name]: checked,
-      });
-    }
-  };
+  // handleTaskButton = (id, name) => {
+  //   if (name === 'done') {
+  //     const doneTask = this.state.tasksList.filter((task) => task.id === id);
+  //     const tasksList = this.state.tasksList.filter((task) => task.id !== id);
+  //     this.setState((prevState) => ({
+  //       doneTasks: prevState.doneTasks.concat(doneTask),
+  //       tasksList,
+  //     }));
+  //   }
+  //   if (name === 'delete') {
+  //     const tasksList = this.state.tasksList.filter((task) => task.id !== id);
+  //     this.setState({
+  //       tasksList,
+  //     });
+  //   }
+  //   if (name === 'deleteDone') {
+  //     const doneTasks = this.state.doneTasks.filter((task) => task.id !== id);
+  //     this.setState({
+  //       doneTasks,
+  //       doneDate: '',
+  //     });
+  //   }
+  // };
 
-  handleAddTask = (e) => {
-    e.preventDefault();
-    if (this.state.task !== '') {
-      const tasksList = [...this.state.tasksList];
-      const title = this.state.task;
-      const date = this.state.date;
-      const id = this.state.tasksList.length + 1;
-      const priority = this.state.priority;
-      const task = { id, title, date, priority };
-      const updateList = tasksList.concat(task);
-      this.setState({
-        tasksList: updateList,
-        task: '',
-        date: this.getDate(),
-        priority: false,
-      });
-    } else {
-      alert('Nie można dodać zadania bez nazwy');
-    }
-  };
+  // getDoneDate() {
+  //   const currentDate = new Date();
+  //   let year = currentDate.getFullYear();
+  //   let month = currentDate.getMonth() + 1;
+  //   let day = currentDate.getDate();
+  //   let hour = currentDate.getHours();
+  //   let minutes = currentDate.getMinutes();
+  //   let seconds = currentDate.getMinutes();
+  //   if (day < 9) {
+  //     day = '0' + day;
+  //   }
+  //   if (month < 9) {
+  //     month = '0' + month;
+  //   }
+  //   if (hour < 9) {
+  //     hour = '0' + hour;
+  //   }
+  //   if (minutes < 9) {
+  //     minutes = '0' + minutes;
+  //   }
+  //   if (seconds < 9) {
+  //     month = '0' + seconds;
+  //   }
+  //   const date =
+  //     year +
+  //     '-' +
+  //     month +
+  //     '-' +
+  //     day +
+  //     ' ' +
+  //     hour +
+  //     ':' +
+  //     minutes +
+  //     ':' +
+  //     seconds;
+  //   console.log('apdejt');
+  //   return date;
+  // }
 
-  handleTaskButton = (id, name) => {
-    if (name === 'done') {
-      const doneTask = this.state.tasksList.filter((task) => task.id === id);
-      const tasksList = this.state.tasksList.filter((task) => task.id !== id);
+  // componentDidUpdate() {
+  //   if (this.state.doneDate === '') {
+  //     this.setState({
+  //       doneDate: this.getDoneDate(),
+  //     });
+  //   }
+  // }
+
+  addTask = (text, priority, date) => {
+    if (text.length > 2) {
+      const task = {
+        id: this.counter,
+        title: text,
+        date,
+        priority,
+        active: true,
+        doneDate: null,
+      };
       this.setState((prevState) => ({
-        doneTasks: prevState.doneTasks.concat(doneTask),
-        tasksList,
+        tasks: [...prevState.tasks, task],
       }));
-    }
-    if (name === 'delete') {
-      const tasksList = this.state.tasksList.filter((task) => task.id !== id);
-      this.setState({
-        tasksList,
-      });
-    }
+      this.counter++;
+      console.log(task);
+    } else alert('Za mało znaków!');
+
+    return true;
   };
 
   render() {
     return (
       <>
         <div className='wrapper'>
-          <AddTask
-            task={this.state.task}
-            priority={this.state.priority}
-            changeInput={this.handleChangeInput}
-            date={this.state.date}
-            addTask={this.handleAddTask}
-          />
-          <TasksList
-            tasksList={this.state.tasksList}
+          <AddTask tasks={this.state.tasks} add={this.addTask} />
+
+          {/* <TasksList
+            tasks={this.state.tasks}
             taskButton={this.handleTaskButton}
-          />
-          <DoneTasks doneTasks={this.state.doneTasks} />
+          /> */}
+          {/* <DoneTasks
+            doneTasks={this.state.doneTasks}
+            doneDate={this.state.doneDate}
+            taskButton={this.handleTaskButton}
+          />  */}
         </div>
       </>
     );

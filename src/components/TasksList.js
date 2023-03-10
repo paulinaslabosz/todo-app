@@ -3,9 +3,7 @@ import Task from './Task';
 import './TasksList.css';
 
 const TasksList = (props) => {
-  const sortList = props.tasksList.sort((a, b) =>
-    a.title.localeCompare(b.title)
-  );
+  const sortList = props.tasks.sort((a, b) => a.title.localeCompare(b.title));
   const listOfTasks = sortList.map((task) => (
     <Task
       key={task.id}
@@ -13,13 +11,13 @@ const TasksList = (props) => {
       title={task.title}
       date={task.date}
       priority={task.priority}
-      taskButton={props.taskButton}
+      // taskButton={props.taskButton}
     />
   ));
   return (
     <>
       <h2 className='todo_header'>Zadania do zrobienia</h2>
-      <ul>{props.tasksList.length !== 0 ? listOfTasks : <p>Brak zadań</p>}</ul>
+      <ul>{props.tasks.length !== 0 ? listOfTasks : <p>Brak zadań</p>}</ul>
     </>
   );
 };
