@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AddTask from './AddTask';
 import './App.css';
 // import DoneTasks from './DoneTasks';
-// import TasksList from './TasksList';
+import TasksList from './TasksList';
 
 class App extends Component {
   counter = 0;
@@ -125,10 +125,10 @@ class App extends Component {
         <div className='wrapper'>
           <AddTask tasks={this.state.tasks} add={this.addTask} />
 
-          {/* <TasksList
+          <TasksList
             tasks={this.state.tasks}
-            taskButton={this.handleTaskButton}
-          /> */}
+            // taskButton={this.handleTaskButton}
+          />
           {/* <DoneTasks
             doneTasks={this.state.doneTasks}
             doneDate={this.state.doneDate}
