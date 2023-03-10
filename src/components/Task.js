@@ -16,13 +16,13 @@ const Task = (props) => {
       </span>
       <span className='button_container'>
         <button
-          onClick={() => props.taskButton(props.id, 'done')}
+          onClick={() => props.changeStatus(props.id)}
           className='task_button'
         >
           ✔️
         </button>
         <button
-          onClick={() => props.taskButton(props.id, 'delete')}
+          onClick={() => props.changeStatus(props.id)}
           className='task_button'
         >
           ❌

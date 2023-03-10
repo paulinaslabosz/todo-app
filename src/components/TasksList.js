@@ -12,7 +12,8 @@ const TasksList = (props) => {
       title={task.title}
       date={task.date}
       priority={task.priority}
-      // taskButton={props.taskButton}
+      active={task.active}
+      changeStatus={props.changeStatus}
     />
   ));
   return (

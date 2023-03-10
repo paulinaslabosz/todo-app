@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import AddTask from './AddTask';
 import './App.css';
-// import DoneTasks from './DoneTasks';
+import DoneTasks from './DoneTasks';
 import TasksList from './TasksList';
 
 class App extends Component {
   counter = 0;
   state = {
     tasks: [],
-    doneTasks: [],
   };
 
   // getDate() {
@@ -27,30 +26,6 @@ class App extends Component {
 
   //   return date;
   // }
-
-  // handleTaskButton = (id, name) => {
-  //   if (name === 'done') {
-  //     const doneTask = this.state.tasksList.filter((task) => task.id === id);
-  //     const tasksList = this.state.tasksList.filter((task) => task.id !== id);
-  //     this.setState((prevState) => ({
-  //       doneTasks: prevState.doneTasks.concat(doneTask),
-  //       tasksList,
-  //     }));
-  //   }
-  //   if (name === 'delete') {
-  //     const tasksList = this.state.tasksList.filter((task) => task.id !== id);
-  //     this.setState({
-  //       tasksList,
-  //     });
-  //   }
-  //   if (name === 'deleteDone') {
-  //     const doneTasks = this.state.doneTasks.filter((task) => task.id !== id);
-  //     this.setState({
-  //       doneTasks,
-  //       doneDate: '',
-  //     });
-  //   }
-  // };
 
   // getDoneDate() {
   //   const currentDate = new Date();
@@ -113,12 +88,23 @@ class App extends Component {
         tasks: [...prevState.tasks, task],
       }));
       this.counter++;
-      console.log(task);
     } else alert('Za mało znaków!');
 
     return true;
   };
 
+  changeTaskStatus = (id) => {
+    console.log('działa');
+    const tasks = Array.from(this.state.tasks);
+    tasks.forEach((task) => {
+      if (task.id === id) {
+        task.active = false;
+      }
+    });
+    this.setState({
+      tasks,
+    });
+  };
   render() {
     return (
       <>
@@ -127,13 +113,12 @@ class App extends Component {
 
           <TasksList
             tasks={this.state.tasks}
-            // taskButton={this.handleTaskButton}
+            changeStatus={this.changeTaskStatus}
           />
-          {/* <DoneTasks
-            doneTasks={this.state.doneTasks}
-            doneDate={this.state.doneDate}
-            taskButton={this.handleTaskButton}
-          />  */}
+          <DoneTasks
+            tasks={this.state.tasks}
+            // doneDate={this.state.doneDate}
+          />
         </div>
       </>
     );
