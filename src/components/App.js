@@ -34,7 +34,7 @@ class App extends Component {
     const finishDate =
       new Date().toISOString().slice(0, 10) +
       ' ' +
-      new Date().toISOString().slice(11, 19);
+      new Date().toLocaleTimeString();
     tasks.forEach((task) => {
       if (task.id === id) {
         task.active = false;
