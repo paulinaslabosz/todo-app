@@ -2,6 +2,8 @@ import React from 'react';
 import './DoneTask.css';
 
 const DoneTask = (props) => {
+  const doneDate = props.doneDate;
+  // console.log(doneDate);
   return (
     <li className='doneTask_grid'>
       <span className='task_title'>{props.title}</span>
@@ -20,7 +22,7 @@ const DoneTask = (props) => {
         </button>
       </span>
       <div className='done_confirm'>
-        <em>Potwierdzenie wykonania: {props.doneDate}</em>
+        <em>Potwierdzenie wykonania: {doneDate}</em>
       </div>
     </li>
   );

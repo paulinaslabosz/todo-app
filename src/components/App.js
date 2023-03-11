@@ -10,70 +10,6 @@ class App extends Component {
     tasks: [],
   };
 
-  // getDate() {
-  //   const currentDate = new Date();
-  //   let year = currentDate.getFullYear();
-  //   let month = currentDate.getMonth() + 1;
-  //   let day = currentDate.getDate();
-
-  //   if (day < 9) {
-  //     day = '0' + day;
-  //   }
-  //   if (month < 9) {
-  //     month = '0' + month;
-  //   }
-  //   const date = year + '-' + month + '-' + day;
-
-  //   return date;
-  // }
-
-  // getDoneDate() {
-  //   const currentDate = new Date();
-  //   let year = currentDate.getFullYear();
-  //   let month = currentDate.getMonth() + 1;
-  //   let day = currentDate.getDate();
-  //   let hour = currentDate.getHours();
-  //   let minutes = currentDate.getMinutes();
-  //   let seconds = currentDate.getMinutes();
-  //   if (day < 9) {
-  //     day = '0' + day;
-  //   }
-  //   if (month < 9) {
-  //     month = '0' + month;
-  //   }
-  //   if (hour < 9) {
-  //     hour = '0' + hour;
-  //   }
-  //   if (minutes < 9) {
-  //     minutes = '0' + minutes;
-  //   }
-  //   if (seconds < 9) {
-  //     month = '0' + seconds;
-  //   }
-  //   const date =
-  //     year +
-  //     '-' +
-  //     month +
-  //     '-' +
-  //     day +
-  //     ' ' +
-  //     hour +
-  //     ':' +
-  //     minutes +
-  //     ':' +
-  //     seconds;
-  //   console.log('apdejt');
-  //   return date;
-  // }
-
-  // componentDidUpdate() {
-  //   if (this.state.doneDate === '') {
-  //     this.setState({
-  //       doneDate: this.getDoneDate(),
-  //     });
-  //   }
-  // }
-
   addTask = (text, priority, date) => {
     if (text.length > 2) {
       const task = {
@@ -94,11 +30,15 @@ class App extends Component {
   };
 
   changeTaskStatus = (id) => {
-    console.log('działa');
     const tasks = Array.from(this.state.tasks);
+    const finishDate =
+      new Date().toISOString().slice(0, 10) +
+      ' ' +
+      new Date().toISOString().slice(11, 19);
     tasks.forEach((task) => {
       if (task.id === id) {
         task.active = false;
+        task.doneDate = finishDate;
       }
     });
     this.setState({
@@ -125,11 +65,7 @@ class App extends Component {
             changeStatus={this.changeTaskStatus}
             deleteTask={this.deleteTask}
           />
-          <DoneTasks
-            tasks={this.state.tasks}
-            deleteTask={this.deleteTask}
-            // doneDate={this.state.doneDate}
-          />
+          <DoneTasks tasks={this.state.tasks} deleteTask={this.deleteTask} />
         </div>
       </>
     );

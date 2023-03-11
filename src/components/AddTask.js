@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import './AddTask.css';
 
 class AddTask extends Component {
+  date = new Date().toISOString().slice(0, 10);
+
   state = {
     text: '',
     priority: false,
-    dateValue: '',
+    dateValue: this.date,
   };
 
   changeInput = (e) => {
     const name = e.target.name;
-    if (name === 'text' || name === 'date') {
+    if (name === 'text' || name === 'dateValue') {
       const value = e.target.value;
       this.setState({
         [name]: value,
@@ -31,12 +33,14 @@ class AddTask extends Component {
       this.setState({
         text: '',
         priority: false,
-        dateValue: '',
+        dateValue: this.date,
       });
     }
   };
 
   render() {
+    let maxDate = this.date.slice(0, 4) * 1 + 1;
+    maxDate = maxDate + '-12-31';
     const { text, priority, dateValue } = this.state;
     return (
       <form onSubmit={this.handleTask}>
@@ -68,9 +72,11 @@ class AddTask extends Component {
           <input
             type='date'
             id='date'
-            name='date'
+            name='dateValue'
             value={dateValue}
             onChange={this.changeInput}
+            min={this.date}
+            max={maxDate}
           />
         </label>
 

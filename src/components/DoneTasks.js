@@ -10,7 +10,7 @@ const DoneTasks = (props) => {
       id={task.id}
       title={task.title}
       date={task.date}
-      doneDate={props.doneDate}
+      doneDate={task.doneDate}
       deleteTask={props.deleteTask}
     />
   ));
