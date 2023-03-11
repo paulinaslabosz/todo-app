@@ -5,100 +5,67 @@ import DoneTasks from './DoneTasks';
 import TasksList from './TasksList';
 
 class App extends Component {
+  counter = 0;
   state = {
-    task: '',
-    priority: false,
-    date: this.getDate(),
-    tasksList: [],
-    doneTasks: [],
+    tasks: [],
   };
 
-  getDate() {
-    const currentDate = new Date();
-    let year = currentDate.getFullYear();
-    let month = currentDate.getMonth() + 1;
-    let day = currentDate.getDate();
-
-    if (day < 9) {
-      day = '0' + day;
-    }
-    if (month < 9) {
-      month = '0' + month;
-    }
-    const date = year + '-' + month + '-' + day;
-
-    return date;
-  }
-
-  handleChangeInput = (e) => {
-    const name = e.target.name;
-    if (name === 'task' || name === 'date') {
-      const value = e.target.value;
-      this.setState({
-        [name]: value,
-      });
-    } else if (name === 'priority') {
-      const checked = e.target.checked;
-      this.setState({
-        [name]: checked,
-      });
-    }
-  };
-
-  handleAddTask = (e) => {
-    e.preventDefault();
-    if (this.state.task !== '') {
-      const tasksList = [...this.state.tasksList];
-      const title = this.state.task;
-      const date = this.state.date;
-      const id = this.state.tasksList.length + 1;
-      const priority = this.state.priority;
-      const task = { id, title, date, priority };
-      const updateList = tasksList.concat(task);
-      this.setState({
-        tasksList: updateList,
-        task: '',
-        date: this.getDate(),
-        priority: false,
-      });
-    } else {
-      alert('Nie można dodać zadania bez nazwy');
-    }
-  };
-
-  handleTaskButton = (id, name) => {
-    if (name === 'done') {
-      const doneTask = this.state.tasksList.filter((task) => task.id === id);
-      const tasksList = this.state.tasksList.filter((task) => task.id !== id);
+  addTask = (text, priority, date) => {
+    if (text.length > 2) {
+      const task = {
+        id: this.counter,
+        title: text,
+        date,
+        priority,
+        active: true,
+        doneDate: null,
+      };
       this.setState((prevState) => ({
-        doneTasks: prevState.doneTasks.concat(doneTask),
-        tasksList,
+        tasks: [...prevState.tasks, task],
       }));
-    }
-    if (name === 'delete') {
-      const tasksList = this.state.tasksList.filter((task) => task.id !== id);
-      this.setState({
-        tasksList,
-      });
-    }
+      this.counter++;
+    } else alert('Za mało znaków!');
+
+    return true;
+  };
+
+  changeTaskStatus = (id) => {
+    const tasks = Array.from(this.state.tasks);
+    const finishDate =
+      new Date().toISOString().slice(0, 10) +
+      ' ' +
+      new Date().toLocaleTimeString();
+    tasks.forEach((task) => {
+      if (task.id === id) {
+        task.active = false;
+        task.doneDate = finishDate;
+      }
+    });
+    this.setState({
+      tasks,
+    });
+  };
+
+  deleteTask = (id) => {
+    let tasks = [...this.state.tasks];
+    tasks = tasks.filter((task) => task.id !== id);
+    this.setState({
+      tasks,
+    });
   };
 
   render() {
     return (
       <>
         <div className='wrapper'>
-          <AddTask
-            task={this.state.task}
-            priority={this.state.priority}
-            changeInput={this.handleChangeInput}
-            date={this.state.date}
-            addTask={this.handleAddTask}
-          />
+          <AddTask tasks={this.state.tasks} add={this.addTask} />
+
           <TasksList
-            tasksList={this.state.tasksList}
-            taskButton={this.handleTaskButton}
+            tasks={this.state.tasks}
+            changeStatus={this.changeTaskStatus}
+            deleteTask={this.deleteTask}
           />
-          <DoneTasks doneTasks={this.state.doneTasks} />
+          <DoneTasks tasks={this.state.tasks} deleteTask={this.deleteTask} />
         </div>
       </>
     );
