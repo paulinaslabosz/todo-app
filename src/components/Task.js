@@ -22,7 +22,7 @@ const Task = (props) => {
           ✔️
         </button>
         <button
-          onClick={() => props.changeStatus(props.id)}
+          onClick={() => props.deleteTask(props.id)}
           className='task_button'
         >
           ❌

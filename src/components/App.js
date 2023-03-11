@@ -105,6 +105,15 @@ class App extends Component {
       tasks,
     });
   };
+
+  deleteTask = (id) => {
+    let tasks = [...this.state.tasks];
+    tasks = tasks.filter((task) => task.id !== id);
+    this.setState({
+      tasks,
+    });
+  };
+
   render() {
     return (
       <>
@@ -114,9 +123,11 @@ class App extends Component {
           <TasksList
             tasks={this.state.tasks}
             changeStatus={this.changeTaskStatus}
+            deleteTask={this.deleteTask}
           />
           <DoneTasks
             tasks={this.state.tasks}
+            deleteTask={this.deleteTask}
             // doneDate={this.state.doneDate}
           />
         </div>

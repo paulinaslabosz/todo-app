@@ -14,6 +14,7 @@ const TasksList = (props) => {
       priority={task.priority}
       active={task.active}
       changeStatus={props.changeStatus}
+      deleteTask={props.deleteTask}
     />
   ));
   return (

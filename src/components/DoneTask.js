@@ -13,7 +13,7 @@ const DoneTask = (props) => {
       </span>
       <span>
         <button
-          onClick={() => props.taskButton(props.id, 'deleteDone')}
+          onClick={() => props.deleteTask(props.id)}
           className='done_button'
         >
           ❌

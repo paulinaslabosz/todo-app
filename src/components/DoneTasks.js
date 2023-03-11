@@ -11,6 +11,7 @@ const DoneTasks = (props) => {
       title={task.title}
       date={task.date}
       doneDate={props.doneDate}
+      deleteTask={props.deleteTask}
     />
   ));
   return (
