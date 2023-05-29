@@ -48,11 +48,12 @@ class AddTask extends Component {
           <label htmlFor='addTask'>
             <input
               type='text'
-              placeholder='dodaj zadanie'
+              placeholder='add task'
               id='addTask'
               value={text}
               name='text'
               onChange={this.changeInput}
+              className='input_addTask'
             />
           </label>
 
@@ -64,23 +65,11 @@ class AddTask extends Component {
               name='priority'
               onChange={this.changeInput}
             />
-            Priorytet
+            Priority
           </label>
         </div>
-        <label htmlFor='date'>
-          Do kiedy zrobić:{' '}
-          <input
-            type='date'
-            id='date'
-            name='dateValue'
-            value={dateValue}
-            onChange={this.changeInput}
-            min={this.date}
-            max={maxDate}
-          />
-        </label>
 
-        <button>Dodaj</button>
+        <button>Add task</button>
       </form>
     );
   }

@@ -1,31 +1,42 @@
-
-
-label {
-display: flex;
-justify-content: center;
+form {
+    background-color: rgba(234, 240, 248, 0.7);
+    border-radius: 10px;
+    padding: 22px;
+    
 }
 
 
+.input_addTask {
+    border-radius: 3px;
+    border: none;
+    font-size: 22px;
+    padding: 5px;
+}
+
+
+.priority {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
 .inlineWrapper {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
-}
-
-.priority {
-    margin-left: 10px;
-}
+} 
 
 
 button {
     display: block;
-    margin: 25px auto;
-    border: 1px solid black;
+    margin: auto;
+   border: none;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 5px;
+    background-color: rgb(27, 87, 160);
     width: 100px;
-    background-color: white;
+    font-weight: bold;
+    color: rgb(233, 242, 250);
+    cursor: pointer;
 }
- button:hover {
-    background-color: rgb(208, 211, 211);
- }
+ 
