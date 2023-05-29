@@ -65,7 +65,9 @@ class App extends Component {
             changeStatus={this.changeTaskStatus}
             deleteTask={this.deleteTask}
           />
-          <DoneTasks tasks={this.state.tasks} deleteTask={this.deleteTask} />
+          {this.state.tasks.length > 0 ? (
+            <DoneTasks tasks={this.state.tasks} deleteTask={this.deleteTask} />
+          ) : null}
         </div>
       </>
     );
