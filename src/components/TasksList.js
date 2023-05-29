@@ -18,10 +18,10 @@ const TasksList = (props) => {
     />
   ));
   return (
-    <>
-      <h2 className='todo_header'>Zadania do zrobienia</h2>
-      <ul>{tasks.length !== 0 ? tasks : <p>Brak zadań</p>}</ul>
-    </>
+    <div className='todo_list'>
+      <h2 className='todo_header'>Tasks to do:</h2>
+      <ul>{tasks.length !== 0 ? tasks : <p>No tasks</p>}</ul>
+    </div>
   );
 };
 
