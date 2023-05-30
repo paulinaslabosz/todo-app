@@ -39,6 +39,7 @@ const TasksList = (props) => {
     <div className='todo_list'>
       <h2 className='todo_header'>Tasks to do:</h2>
       <ul>{activeTasks.length !== 0 ? activeTasks : <p>No tasks</p>}</ul>
+      <h2 className='todo_header'>Done tasks:</h2>
       <ul>{doneTasks}</ul>
     </div>
   );
