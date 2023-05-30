@@ -11,6 +11,10 @@
     padding-top: 20px
 }
 
+.todo_menu {
+   display: none;
+   
+}
 ul {
     padding: 25px;
     list-style-type: none;
