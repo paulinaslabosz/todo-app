@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AddTask from './AddTask';
 import './App.css';
-import DoneTasks from './DoneTasks';
 import TasksList from './TasksList';
 
 class App extends Component {
@@ -65,9 +64,6 @@ class App extends Component {
             changeStatus={this.changeTaskStatus}
             deleteTask={this.deleteTask}
           />
-          {/* {this.state.tasks.length > 0 ? (
-            <DoneTasks tasks={this.state.tasks} deleteTask={this.deleteTask} />
-          ) : null} */}
         </div>
       </>
     );
