@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Task from './Task';
 import DoneTask from './DoneTask';
 import Menu from './Menu';
+import Nav from './Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './TasksList.css';
@@ -62,7 +63,7 @@ const TasksList = (props) => {
       )}
 
       <h2 className='todo_header'>Tasks to do:</h2>
-
+      <Nav />
       <ul>{activeTasks.length !== 0 ? activeTasks : <p>No tasks</p>}</ul>
       {doneTasks.length !== 0 ? (
         <>
