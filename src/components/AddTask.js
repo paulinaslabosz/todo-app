@@ -1,78 +1,80 @@
-import React, { Component } from 'react';
+import React, { useContext, useState } from 'react';
+import { Context } from '../context';
 import './AddTask.css';
 
-class AddTask extends Component {
-  date = new Date().toISOString().slice(0, 10);
+function AddTask() {
+  const [context, setContext] = useContext(Context);
+  const [content, setContent] = useState('');
+  const [priority, setPriority] = useState(false);
+  // const date = new Date().toISOString().slice(0, 10);
 
-  state = {
-    text: '',
-    priority: false,
-    dateValue: this.date,
+  // adding new task
+  const addTask = (content, priority) => {
+    if (content.length > 2) {
+      const id = Math.floor(Math.random() * 9999);
+      const task = {
+        id: id,
+        title: content,
+        priority,
+        active: true,
+        doneDate: null,
+      };
+      setContext(() => [...context, task]);
+    } else alert('Za mało znaków!');
+    return true;
   };
 
-  changeInput = (e) => {
+  const handleTask = (e) => {
+    e.preventDefault();
+    const add = addTask(content, priority);
+    if (add) {
+      setContent('');
+      setPriority(false);
+    }
+  };
+
+  // handle inputs
+  const changeInput = (e) => {
     const name = e.target.name;
-    if (name === 'text' || name === 'dateValue') {
+    if (name === 'text') {
       const value = e.target.value;
-      this.setState({
-        [name]: value,
-      });
+      setContent(value);
     } else if (name === 'priority') {
       const checked = e.target.checked;
-      this.setState({
-        [name]: checked,
-      });
+      setPriority(checked);
     }
   };
 
-  handleTask = (e) => {
-    e.preventDefault();
-    const { text, priority, dateValue } = this.state;
-    const add = this.props.add(text, priority, dateValue);
-    if (add) {
-      this.setState({
-        text: '',
-        priority: false,
-        dateValue: this.date,
-      });
-    }
-  };
+  return (
+    <form onSubmit={handleTask}>
+      <div className='inlineWrapper'>
+        <label htmlFor='addTask'>
+          <input
+            type='text'
+            placeholder='add task'
+            id='addTask'
+            value={content}
+            name='text'
+            onChange={changeInput}
+            className='input_addTask'
+          />
+        </label>
 
-  render() {
-    let maxDate = this.date.slice(0, 4) * 1 + 1;
-    maxDate = maxDate + '-12-31';
-    const { text, priority, dateValue } = this.state;
-    return (
-      <form onSubmit={this.handleTask}>
-        <div className='inlineWrapper'>
-          <label htmlFor='addTask'>
-            <input
-              type='text'
-              placeholder='add task'
-              id='addTask'
-              value={text}
-              name='text'
-              onChange={this.changeInput}
-              className='input_addTask'
-            />
-          </label>
+        <label htmlFor='checkbox' className='priority'>
+          <input
+            type='checkbox'
+            id='checkbox'
+            checked={priority}
+            name='priority'
+            onChange={changeInput}
+          />
+          Priority
+        </label>
+      </div>
 
-          <label htmlFor='checkbox' className='priority'>
-            <input
-              type='checkbox'
-              id='checkbox'
-              checked={priority}
-              name='priority'
-              onChange={this.changeInput}
-            />
-            Priority
-          </label>
-        </div>
-
-        <button>Add task</button>
-      </form>
-    );
-  }
+      <button>Add task</button>
+    </form>
+  );
 }
 
 export default AddTask;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Task from './Task';
 import DoneTask from './DoneTask';
 import Menu from './Menu';
@@ -6,11 +6,36 @@ import Nav from './Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './TasksList.css';
+import { Context } from '../context';
 
 const TasksList = (props) => {
   const [isActive, setActive] = useState(false);
+  const [context, setContext] = useContext(Context);
 
-  const doneTasks = props.tasks
+  // functions for tasks
+  const changeTaskStatus = (id) => {
+    const tasks = Array.from(context);
+    const finishDate =
+      new Date().toISOString().slice(0, 10) +
+      ' ' +
+      new Date().toLocaleTimeString();
+    context.forEach((task) => {
+      if (task.id === id) {
+        task.active = false;
+        task.doneDate = finishDate;
+      }
+    });
+    setContext(tasks);
+  };
+
+  const deleteTask = (id) => {
+    let tasks = context;
+    tasks = tasks.filter((task) => task.id !== id);
+    setContext(tasks);
+  };
+
+  // done and active task arrays
+  const doneTasks = context
     .filter((task) => task.active === false)
     .map((task) => (
       <DoneTask
@@ -20,13 +45,13 @@ const TasksList = (props) => {
         date={task.date}
         priority={task.priority}
         active={task.active}
-        changeStatus={props.changeStatus}
-        deleteTask={props.deleteTask}
+        changeStatus={changeTaskStatus}
+        deleteTask={deleteTask}
         doneDate={task.doneDate}
       />
     ));
 
-  const activeTasks = props.tasks
+  const activeTasks = context
     .filter((task) => task.active === true)
     .sort((a, b) => a.title.localeCompare(b.title))
     .map((task) => (
@@ -37,8 +62,8 @@ const TasksList = (props) => {
         date={task.date}
         priority={task.priority}
         active={task.active}
-        changeStatus={props.changeStatus}
-        deleteTask={props.deleteTask}
+        changeStatus={changeTaskStatus}
+        deleteTask={deleteTask}
       />
     ));
 
