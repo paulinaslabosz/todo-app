@@ -6,7 +6,6 @@ function Nav() {
       <ul>
         <li>All</li>
         <li>Priorities</li>
-        <li>Non-Priorities</li>
       </ul>
     </div>
   );

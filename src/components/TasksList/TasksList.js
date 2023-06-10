@@ -1,14 +1,15 @@
 import React, { useState, useContext } from 'react';
-import Task from './Task';
-import DoneTask from './DoneTask';
-import Menu from './Menu';
-import Nav from './Nav';
+import DoneTask from '../SingleTask/DoneTask';
+import Menu from '../Navigation/Menu';
+import Nav from '../Navigation/Nav';
+import Task from '../SingleTask/Task';
+import ActiveTasks from './ActiveTasks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './TasksList.css';
-import { Context } from '../context';
+import { Context } from '../../context';
 
-const TasksList = (props) => {
+const TasksList = () => {
   const [isActive, setActive] = useState(false);
   const [context, setContext] = useContext(Context);
 
@@ -34,23 +35,7 @@ const TasksList = (props) => {
     setContext(tasks);
   };
 
-  // done and active task arrays
-  const doneTasks = context
-    .filter((task) => task.active === false)
-    .map((task) => (
-      <DoneTask
-        key={task.id}
-        id={task.id}
-        title={task.title}
-        date={task.date}
-        priority={task.priority}
-        active={task.active}
-        changeStatus={changeTaskStatus}
-        deleteTask={deleteTask}
-        doneDate={task.doneDate}
-      />
-    ));
-
+  // done and active tasks arrays
   const activeTasks = context
     .filter((task) => task.active === true)
     .sort((a, b) => a.title.localeCompare(b.title))
@@ -64,6 +49,22 @@ const TasksList = (props) => {
         active={task.active}
         changeStatus={changeTaskStatus}
         deleteTask={deleteTask}
+      />
+    ));
+
+  const doneTasks = context
+    .filter((task) => task.active === false)
+    .map((task) => (
+      <DoneTask
+        key={task.id}
+        id={task.id}
+        title={task.title}
+        date={task.date}
+        priority={task.priority}
+        active={task.active}
+        changeStatus={changeTaskStatus}
+        deleteTask={deleteTask}
+        doneDate={task.doneDate}
       />
     ));
 
@@ -89,7 +90,15 @@ const TasksList = (props) => {
 
       <h2 className='todo_header'>Tasks to do:</h2>
       <Nav />
-      <ul>{activeTasks.length !== 0 ? activeTasks : <p>No tasks</p>}</ul>
+      {activeTasks.length !== 0 ? (
+        <ActiveTasks
+          tasks={activeTasks}
+          changeStatus={changeTaskStatus}
+          deleteTask={deleteTask}
+        />
+      ) : (
+        <p>No tasks</p>
+      )}
       {doneTasks.length !== 0 ? (
         <>
           <h2 className='todo_header'>Done tasks:</h2>

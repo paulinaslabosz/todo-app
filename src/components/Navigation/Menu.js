@@ -6,7 +6,6 @@ function Menu() {
     <ul className='menu_list'>
       <li>All</li>
       <li>Priorities</li>
-      <li>Non-priorities</li>
     </ul>
   );
 }
