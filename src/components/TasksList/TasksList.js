@@ -14,6 +14,7 @@ const TasksList = () => {
   const { tasks, setTasks } = useContext(Tasks);
 
   // functions for tasks
+
   const changeTaskStatus = (id) => {
     const currentTasks = Array.from(tasks);
     const finishDate =
@@ -26,7 +27,7 @@ const TasksList = () => {
         task.doneDate = finishDate;
       }
     });
-    setTasks(tasks);
+    setTasks(currentTasks);
   };
 
   const deleteTask = (id) => {

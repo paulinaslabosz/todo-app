@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { ActiveNavButton } from '../../context';
+import './Nav.css';
 function Nav() {
   const { activeNav, setActiveNav } = useContext(ActiveNavButton);
   const handleButton = (name) => {

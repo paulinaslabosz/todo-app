@@ -22,7 +22,6 @@ function ActiveTasks(props) {
         deleteTask={props.deleteTask}
       />
     ));
-
   return (
     <>
       <ul>{activeNav ? priorityTasks : props.tasks}</ul>
