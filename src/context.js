@@ -1,3 +1,5 @@
 import { createContext } from 'react';
 
-export const Context = createContext([]);
+export const Tasks = createContext();
+
+export const ActiveNavButton = createContext();

@@ -7,36 +7,36 @@ import ActiveTasks from './ActiveTasks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './TasksList.css';
-import { Context } from '../../context';
+import { Tasks } from '../../context';
 
 const TasksList = () => {
   const [isActive, setActive] = useState(false);
-  const [context, setContext] = useContext(Context);
+  const { tasks, setTasks } = useContext(Tasks);
 
   // functions for tasks
   const changeTaskStatus = (id) => {
-    const tasks = Array.from(context);
+    const currentTasks = Array.from(tasks);
     const finishDate =
       new Date().toISOString().slice(0, 10) +
       ' ' +
       new Date().toLocaleTimeString();
-    context.forEach((task) => {
+    currentTasks.forEach((task) => {
       if (task.id === id) {
         task.active = false;
         task.doneDate = finishDate;
       }
     });
-    setContext(tasks);
+    setTasks(tasks);
   };
 
   const deleteTask = (id) => {
-    let tasks = context;
-    tasks = tasks.filter((task) => task.id !== id);
-    setContext(tasks);
+    let activeTasks = tasks;
+    activeTasks = activeTasks.filter((task) => task.id !== id);
+    setTasks(activeTasks);
   };
 
   // done and active tasks arrays
-  const activeTasks = context
+  const activeTasks = tasks
     .filter((task) => task.active === true)
     .sort((a, b) => a.title.localeCompare(b.title))
     .map((task) => (
@@ -52,7 +52,7 @@ const TasksList = () => {
       />
     ));
 
-  const doneTasks = context
+  const doneTasks = tasks
     .filter((task) => task.active === false)
     .map((task) => (
       <DoneTask

@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { Context } from '../context';
+import { Tasks } from '../context';
 import './AddTask.css';
 
 function AddTask() {
-  const [context, setContext] = useContext(Context);
+  const { tasks, setTasks } = useContext(Tasks);
   const [content, setContent] = useState('');
   const [priority, setPriority] = useState(false);
   // const date = new Date().toISOString().slice(0, 10);
@@ -19,7 +19,7 @@ function AddTask() {
         active: true,
         doneDate: null,
       };
-      setContext(() => [...context, task]);
+      setTasks(() => [...tasks, task]);
     } else alert('Za mało znaków!');
     return true;
   };

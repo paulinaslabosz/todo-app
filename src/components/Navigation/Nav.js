@@ -1,12 +1,19 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import { ActiveNavButton } from '../../context';
 function Nav() {
+  const { activeNav, setActiveNav } = useContext(ActiveNavButton);
+  const handleButton = (name) => {
+    if (name === 'all') {
+      setActiveNav(false);
+    } else if (name === 'priorities') {
+      setActiveNav(true);
+    }
+  };
+
   return (
     <div className='nav'>
-      <ul>
-        <li>All</li>
-        <li>Priorities</li>
-      </ul>
+      <button onClick={() => handleButton('all')}>All</button>
+      <button onClick={() => handleButton('priorities')}>Priorities</button>
     </div>
   );
 }

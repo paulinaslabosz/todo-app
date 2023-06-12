@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import Task from '../SingleTask/Task';
-import { Context } from '../../context';
+import { Tasks, ActiveNavButton } from '../../context';
 
 function ActiveTasks(props) {
-  const context = useContext(Context);
+  const tasks = useContext(Tasks);
+  const activeTasks = tasks.tasks;
+  const { activeNav } = useContext(ActiveNavButton);
 
-  const priorityTasks = context
+  const priorityTasks = activeTasks
     .filter((task) => task.active === true && task.priority === true)
     .sort((a, b) => a.title.localeCompare(b.title))
     .map((task) => (
@@ -23,8 +25,7 @@ function ActiveTasks(props) {
 
   return (
     <>
-      <ul>{props.tasks}</ul>
-      <ul>{priorityTasks}</ul>
+      <ul>{activeNav ? priorityTasks : props.tasks}</ul>
     </>
   );
 }
