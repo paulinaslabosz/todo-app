@@ -1,16 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import DoneTask from '../SingleTask/DoneTask';
-import Menu from '../Navigation/Menu';
 import Nav from '../Navigation/Nav';
 import Task from '../SingleTask/Task';
 import ActiveTasks from './ActiveTasks';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './TasksList.css';
 import { Tasks } from '../../context';
 
 const TasksList = () => {
-  const [isActive, setActive] = useState(false);
   const { tasks, setTasks } = useContext(Tasks);
 
   // functions for tasks
@@ -71,24 +67,6 @@ const TasksList = () => {
 
   return (
     <div className='todo_list'>
-      {isActive ? (
-        <>
-          <FontAwesomeIcon
-            onClick={() => setActive(!isActive)}
-            icon={faXmark}
-            className='todo_menu'
-          />
-          <Menu />
-        </>
-      ) : (
-        <FontAwesomeIcon
-          onClick={() => setActive(!isActive)}
-          icon={faBars}
-          size='lg'
-          className='todo_menu'
-        />
-      )}
-
       <h2 className='todo_header'>Tasks to do:</h2>
       <Nav />
       {activeTasks.length !== 0 ? (
