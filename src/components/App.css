@@ -5,3 +5,13 @@
     
 
 }
+
+@media screen and (max-width: 480px) {
+.app {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+}
+
